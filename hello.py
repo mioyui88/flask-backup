@@ -19,20 +19,15 @@ def hello():
 
 @app.route("/ip")
 def ip():
-    ip = request.args.get('IP')
+    mac = request.args.get('IP')
     cursor = mysql.connect().cursor()
-    cursor.execute("SELECT * from DEVICE_list_0 where DEV_ip = '"+ip+"' ")
+    cursor.execute("SELECT * from DEVICE_list_0 where DEV_mac = '"+mac+"' ")
     data = cursor.fetchall()
     if data == ():
      return "no data"
     else:
      r = json.dumps(data)
      return r
-
-
-@app.route('/user/<name>')
-def user(name):
-	return '<h1>Hello, % s!</h1>' % name
 
  
 if __name__ == "__main__":
